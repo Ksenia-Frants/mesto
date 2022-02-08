@@ -1,0 +1,23 @@
+.elements {
+  padding-top: 51px;
+  margin: auto;
+  max-width: 880px;
+}
+
+@media screen and (max-width: 950px) {
+  .elements {
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .elements {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .elements {
+    padding-top: 36px;
+  }
+}
