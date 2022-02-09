@@ -1,17 +1,24 @@
-# Проект: Место
+# Project: Mesto
 
-### Обзор
+## Description
 
-* Figma
-* Картинки
+This is my fourth project work. She gave me a start in learning java script.
+
+In my project work, an application for adding pictures or photos is implemented. It's like instagram or tumblr. Images can be described and liked. The profile can be edited by entering your name and occupation.
+
+The work was done according to the layout of figma.
 
 **Figma**
+[Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+**It uses technologies such as:**
 
-**Картинки**
+- flexbox layout;
+- advanced HTML and CSS capabilities;
+- positioning elements;
+- adaptive layout;
+- grid layout;
+- basic Java Script and Browser Operation;
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+**Project link:**
+[Ссылка на проект](https://ksenia-frants.github.io/mesto/)
