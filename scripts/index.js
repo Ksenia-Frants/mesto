@@ -6,8 +6,6 @@ const profileEditButtonElement = document.querySelector(
 const nameInput = popupElement.querySelector(".popup__item_name");
 const jobInput = popupElement.querySelector(".popup__item_description");
 
-console.log(jobInput);
-
 const togglePopupVisibility = function () {
   popupElement.classList.toggle("popup_opened");
 };
