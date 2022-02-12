@@ -14,6 +14,7 @@
   height: 50px;
   transition: opacity 0.3s linear;
   cursor: pointer;
+  margin: 48px 0 0;
 }
 
 .popup__button:hover {

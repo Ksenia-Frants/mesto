@@ -20,6 +20,6 @@
 
 @media screen and (max-width: 320px) {
   .profile {
-    padding-top: 42px;
+    padding: 42px 19px 0;
   }
 }
