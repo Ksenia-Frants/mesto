@@ -10,8 +10,14 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 730px) {
   .popup {
-    padding: 0 19px 0;
+    padding: 0 10px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .popup {
+    padding: 0 19px;
   }
 }
