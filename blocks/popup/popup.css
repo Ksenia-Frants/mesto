@@ -10,9 +10,9 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 550px) {
   .popup {
-    padding: 0 10px;
+    padding: 0 13px;
   }
 }
 

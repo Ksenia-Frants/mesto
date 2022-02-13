@@ -6,16 +6,11 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 550px) {
   .popup__form {
     box-sizing: content-box;
-    padding: 34px 137px 37px;
-  }
-}
-
-@media screen and (max-width: 570px) {
-  .popup__form {
-    padding: 25px 63px;
+    padding: 34px 53px 37px;
+    max-width: 475px;
   }
 }
 
