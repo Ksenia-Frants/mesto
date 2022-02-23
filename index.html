@@ -107,7 +107,7 @@
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <section class="popup popup__edit">
       <div class="popup__container">
         <button class="popup__close"></button>
         <form name="editForm" class="popup__form">
@@ -134,6 +134,42 @@
         </form>
       </div>
     </section>
+    <section class="popup popup__add">
+      <div class="popup__container">
+        <button class="popup__close"></button>
+        <form name="addForm" class="popup__form">
+          <h2 class="popup__title">Новое место</h2>
+          <fieldset class="popup__info">
+            <label for="title" class="popup__label"></label>
+            <input
+              type="text"
+              class="popup__input popup__input_type_name"
+              id="title"
+              name="title"
+              placeholder="Название"
+            />
+            <label for="link" class="popup__label"></label>
+            <input
+              type="url"
+              class="popup__input popup__input_type_description"
+              id="link"
+              name="link"
+              placeholder="Ссылка на картинку"
+            />
+          </fieldset>
+          <button type="submit" class="popup__button">Создать</button>
+        </form>
+      </div>
+    </section>
+    <template class="template">
+      <li class="elements__list-object">
+        <img src="#" alt="" class="elements__image" />
+        <div class="elements__image-description">
+          <h2 class="elements__title"></h2>
+          <button class="elements__like elements__like_active"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
