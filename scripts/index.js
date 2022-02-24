@@ -95,35 +95,18 @@ function createPhotoCard(title, link) {
 
 initialCards.forEach(function (item) {
   const newCard = createPhotoCard(item.name, item.link);
-  listElement.prepend(newCard);
+  listElement.appendChild(newCard);
 });
 
-/*function renderCard(title, link) {
-const itemElement = templateContent.cloneNode(true);
-cardTitle.textContent = title;
-cardImage.src = link;
-
+function formAddSubmitHandler(evt) {
+  evt.preventDefault();
+  const name = titleInput.value;
+  const link = descriptionInput.value;
+  const newCard = createPhotoCard(name, link);
+  listElement.prepend(newCard);
+  closeAddPopup();
 }
 
-function renderItem(item) {
-  const itemElement = templateContent.cloneNode(true);
-  itemElement.querySelector(".elements__title").textContent = item;
-  listElement.appendChild(itemElement);
-}
-
-function renderItems(initialCards) {
-  initialCards.forEach(renderItem);
-}
-
-renderItems(initialCards);
-function handleSubmit() {
-  const item = titleInput.value;
-}
-
-popupAddElement.addEventListener('submit', (event) => {
-event.preventDefault();
-
-});*/
 profileEditButtonElement.addEventListener("click", openEditPopup);
 popupCloseElement.addEventListener("click", closeEditPopup);
 popupEditElement.addEventListener("click", closePopupByClickOnOverlay);
@@ -131,3 +114,4 @@ popupEditElement.addEventListener("submit", formEditSubmitHandler);
 profileAddButtonElement.addEventListener("click", openAddPopup);
 popupAddCloseElement.addEventListener("click", closeAddPopup);
 popupAddElement.addEventListener("click", closePopupByClickOnOverlay);
+popupAddElement.addEventListener("submit", formAddSubmitHandler);
