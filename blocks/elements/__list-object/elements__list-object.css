@@ -3,3 +3,9 @@
   background-color: #ffff;
   width: 100%;
 }
+
+@media screen and (max-width: 370px) {
+  .elements__list-object {
+    max-width: 282px;
+  }
+}
