@@ -47,6 +47,7 @@ const listElement = document.querySelector(".elements__list");
 const photoCardTemplate = document.querySelector("#photo-card-template");
 const cardImage = photoCardTemplate.querySelector(".elements__image");
 const cardTitle = photoCardTemplate.querySelector(".elements__title");
+const deleteButtonElement = document.querySelector(".elements__delete");
 const initialCards = [
   {
     name: "Архыз",
@@ -107,6 +108,11 @@ function formAddSubmitHandler(evt) {
   closeAddPopup();
 }
 
+function handleDelete(event) {
+  const itemElement = event.target.closest(".elements__list-object");
+  itemElement.remove();
+}
+
 profileEditButtonElement.addEventListener("click", openEditPopup);
 popupCloseElement.addEventListener("click", closeEditPopup);
 popupEditElement.addEventListener("click", closePopupByClickOnOverlay);
@@ -115,3 +121,4 @@ profileAddButtonElement.addEventListener("click", openAddPopup);
 popupAddCloseElement.addEventListener("click", closeAddPopup);
 popupAddElement.addEventListener("click", closePopupByClickOnOverlay);
 popupAddElement.addEventListener("submit", formAddSubmitHandler);
+deleteButtonElement.addEventListener("click", handleDelete);
