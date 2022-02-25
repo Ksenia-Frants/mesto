@@ -48,6 +48,7 @@ const photoCardTemplate = document.querySelector("#photo-card-template");
 const cardImage = photoCardTemplate.querySelector(".elements__image");
 const cardTitle = photoCardTemplate.querySelector(".elements__title");
 const deleteButtonElement = document.querySelector(".elements__delete");
+const likeButtonElement = document.querySelector(".elements__like");
 const initialCards = [
   {
     name: "Архыз",
@@ -113,6 +114,10 @@ function handleDelete(event) {
   itemElement.remove();
 }
 
+function handleLike(event) {
+  event.target.classList.toggle("elements__like_active");
+}
+
 profileEditButtonElement.addEventListener("click", openEditPopup);
 popupCloseElement.addEventListener("click", closeEditPopup);
 popupEditElement.addEventListener("click", closePopupByClickOnOverlay);
@@ -122,3 +127,4 @@ popupAddCloseElement.addEventListener("click", closeAddPopup);
 popupAddElement.addEventListener("click", closePopupByClickOnOverlay);
 popupAddElement.addEventListener("submit", formAddSubmitHandler);
 deleteButtonElement.addEventListener("click", handleDelete);
+likeButtonElement.addEventListener("click", handleLike);
