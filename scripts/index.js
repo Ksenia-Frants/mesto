@@ -44,12 +44,17 @@ const descriptionInput = popupAddElement.querySelector(
   ".popup__input_type_description"
 );
 const listElement = document.querySelector(".elements__list");
-const photoCardTemplate = document.querySelector("#photo-card-template");
-const cardImage = photoCardTemplate.querySelector(".elements__image");
-const cardTitle = photoCardTemplate.querySelector(".elements__title");
+const itemTemplateContent = document.querySelector(
+  "#photo-card-template"
+).content;
+const newCard = itemTemplateContent
+  .querySelector(".elements__list-object")
+  .cloneNode(true);
+const cardImage = itemTemplateContent.querySelector(".elements__image");
+const cardTitle = itemTemplateContent.querySelector(".elements__title");
 const deleteButtonElement = document.querySelector(".elements__delete");
 const likeButtonElement = document.querySelector(".elements__like");
-const initialCards = [
+const items = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -84,18 +89,20 @@ const closeAddPopup = function () {
   popupAddElement.classList.remove("popup_opened");
 };
 
-function createPhotoCard(title, link) {
-  const newCard = photoCardTemplate.content
+function createPhotoCard(name, link) {
+  const newCard = itemTemplateContent
     .querySelector(".elements__list-object")
     .cloneNode(true);
   const imageLink = newCard.querySelector(".elements__image");
   const imageName = newCard.querySelector(".elements__title");
-  imageName.textContent = title;
+  setEventListeners(newCard);
+  imageName.textContent = name;
   imageLink.src = link;
+
   return newCard;
 }
 
-initialCards.forEach(function (item) {
+items.forEach(function (item) {
   const newCard = createPhotoCard(item.name, item.link);
   listElement.appendChild(newCard);
 });
@@ -107,6 +114,15 @@ function formAddSubmitHandler(evt) {
   const newCard = createPhotoCard(name, link);
   listElement.prepend(newCard);
   closeAddPopup();
+}
+
+function setEventListeners(newCard) {
+  newCard
+    .querySelector(".elements__delete")
+    .addEventListener("click", handleDelete);
+  newCard
+    .querySelector(".elements__like")
+    .addEventListener("click", handleLike);
 }
 
 function handleDelete(event) {
