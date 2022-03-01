@@ -3,6 +3,12 @@
   height: 282px;
   border-radius: 10px 10px 0 0;
   object-fit: cover;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
+
+.elements__image:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 370px) {
