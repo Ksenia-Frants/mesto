@@ -1,4 +1,4 @@
-const popupEditElement = document.querySelector(".popup__edit");
+const popupEditElement = document.querySelector(".popup_edit");
 const popupCloseElement = popupEditElement.querySelector(".popup__close");
 const profileEditButtonElement = document.querySelector(
   ".profile__edit-button"
@@ -37,7 +37,7 @@ function formEditSubmitHandler(evt) {
   closeEditPopup();
 }
 
-const popupAddElement = document.querySelector(".popup__add");
+const popupAddElement = document.querySelector(".popup_add");
 const popupAddCloseElement = popupAddElement.querySelector(".popup__close");
 const profileAddButtonElement = document.querySelector(".profile__add-button");
 const titleInput = popupAddElement.querySelector(".popup__input_type_name");
@@ -50,7 +50,7 @@ const itemTemplateContent = document.querySelector(
 ).content;
 const cardImage = itemTemplateContent.querySelector(".elements__image");
 const cardTitle = itemTemplateContent.querySelector(".elements__title");
-const popupPhotoElement = document.querySelector(".popup__photo");
+const popupPhotoElement = document.querySelector(".popup_photo");
 const popupPhotoCloseElement = popupPhotoElement.querySelector(".popup__close");
 const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
 
