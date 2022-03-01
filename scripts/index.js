@@ -48,9 +48,6 @@ const listElement = document.querySelector(".elements__list");
 const itemTemplateContent = document.querySelector(
   "#photo-card-template"
 ).content;
-const newCard = itemTemplateContent
-  .querySelector(".elements__list-object")
-  .cloneNode(true);
 const cardImage = itemTemplateContent.querySelector(".elements__image");
 const cardTitle = itemTemplateContent.querySelector(".elements__title");
 const popupPhotoElement = document.querySelector(".popup__photo");
@@ -131,15 +128,6 @@ function formAddSubmitHandler(evt) {
   const newCard = createPhotoCard(name, link);
   listElement.prepend(newCard);
   closeAddPopup();
-}
-
-function handleDelete(event) {
-  const itemElement = event.target.closest(".elements__list-object");
-  itemElement.remove();
-}
-
-function handleLike(event) {
-  event.target.classList.toggle("elements__like_active");
 }
 
 const openPhotoPopup = function () {
