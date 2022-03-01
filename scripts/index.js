@@ -27,6 +27,7 @@ const closePopupByClickOnOverlay = function (event) {
   }
   closeEditPopup();
   closeAddPopup();
+  closePhotoPopup();
 };
 
 function formEditSubmitHandler(evt) {
@@ -52,8 +53,10 @@ const newCard = itemTemplateContent
   .cloneNode(true);
 const cardImage = itemTemplateContent.querySelector(".elements__image");
 const cardTitle = itemTemplateContent.querySelector(".elements__title");
-const deleteButtonElement = document.querySelector(".elements__delete");
-const likeButtonElement = document.querySelector(".elements__like");
+const popupPhotoElement = document.querySelector(".popup__photo");
+const popupPhotoCloseElement = popupPhotoElement.querySelector(".popup__close");
+const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
+
 const items = [
   {
     name: "Архыз",
@@ -95,10 +98,24 @@ function createPhotoCard(name, link) {
     .cloneNode(true);
   const imageLink = newCard.querySelector(".elements__image");
   const imageName = newCard.querySelector(".elements__title");
-  setEventListeners(newCard);
   imageName.textContent = name;
   imageLink.src = link;
-
+  newCard
+    .querySelector(".elements__like")
+    .addEventListener("click", function (event) {
+      event.target.classList.toggle("elements__like_active");
+    });
+  newCard
+    .querySelector(".elements__delete")
+    .addEventListener("click", function (event) {
+      const itemElement = event.target.closest(".elements__list-object");
+      itemElement.remove();
+    });
+  imageLink.addEventListener("click", function (event) {
+    openPhotoPopup();
+    imagePhotoPopup.src = link;
+    popupPhotoElement.querySelector(".popup__caption").textContent = name;
+  });
   return newCard;
 }
 
@@ -116,15 +133,6 @@ function formAddSubmitHandler(evt) {
   closeAddPopup();
 }
 
-function setEventListeners(newCard) {
-  newCard
-    .querySelector(".elements__delete")
-    .addEventListener("click", handleDelete);
-  newCard
-    .querySelector(".elements__like")
-    .addEventListener("click", handleLike);
-}
-
 function handleDelete(event) {
   const itemElement = event.target.closest(".elements__list-object");
   itemElement.remove();
@@ -134,6 +142,14 @@ function handleLike(event) {
   event.target.classList.toggle("elements__like_active");
 }
 
+const openPhotoPopup = function () {
+  popupPhotoElement.classList.add("popup_opened");
+};
+
+const closePhotoPopup = function () {
+  popupPhotoElement.classList.remove("popup_opened");
+};
+
 profileEditButtonElement.addEventListener("click", openEditPopup);
 popupCloseElement.addEventListener("click", closeEditPopup);
 popupEditElement.addEventListener("click", closePopupByClickOnOverlay);
@@ -142,5 +158,5 @@ profileAddButtonElement.addEventListener("click", openAddPopup);
 popupAddCloseElement.addEventListener("click", closeAddPopup);
 popupAddElement.addEventListener("click", closePopupByClickOnOverlay);
 popupAddElement.addEventListener("submit", formAddSubmitHandler);
-deleteButtonElement.addEventListener("click", handleDelete);
-likeButtonElement.addEventListener("click", handleLike);
+popupPhotoCloseElement.addEventListener("click", closePhotoPopup);
+popupPhotoElement.addEventListener("click", closePopupByClickOnOverlay);
