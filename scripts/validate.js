@@ -13,7 +13,6 @@ const hideError = (popupElement, inputElement) => {
 };
 
 const checkValidity = (popupElement, inputElement) => {
-  console.log(inputElement.validity);
   const isInputNotValid = !inputElement.validity.valid;
 
   if (isInputNotValid) {
@@ -24,13 +23,30 @@ const checkValidity = (popupElement, inputElement) => {
   }
 };
 
+const toggleButtonState = (inputList, submitButtonElement) => {
+  const inputElements = Array.from(inputList);
+  const hasInvalidInput = inputElements.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+
+  if (hasInvalidInput) {
+    submitButtonElement.classList.add("popup__button_inactive");
+    submitButtonElement.setAttribute("disabled", true);
+  } else {
+    submitButtonElement.classList.remove("popup__button_inactive");
+    submitButtonElement.removeAttribute("disabled");
+  }
+};
+
 const setEventListeners = (popupElement) => {
   const inputList = popupElement.querySelectorAll(".popup__input");
+  const submitButtonElement = popupElement.querySelector(".popup__button");
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", (event) => {
       console.log(event.target.name, event.target.value);
 
       checkValidity(popupElement, inputElement);
+      toggleButtonState(inputList, submitButtonElement);
     });
   });
 };
