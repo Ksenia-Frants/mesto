@@ -1,11 +1,26 @@
+const showError = (popupElement, inputElement, errorMessage) => {
+  const errorElement = popupElement.querySelector(`#${inputElement.id}-error`);
+
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("popup__input-error_active");
+};
+
+const hideError = (popupElement, inputElement) => {
+  const errorElement = popupElement.querySelector(`#${inputElement.id}-error`);
+
+  errorElement.textContent = "";
+  errorElement.classList.remove("popup__input-error_active");
+};
+
 const checkValidity = (popupElement, inputElement) => {
   console.log(inputElement.validity);
   const isInputNotValid = !inputElement.validity.valid;
 
   if (isInputNotValid) {
-    showError();
+    const errorMessage = inputElement.validationMessage;
+    showError(popupElement, inputElement, errorMessage);
   } else {
-    hideError();
+    hideError(popupElement, inputElement);
   }
 };
 
