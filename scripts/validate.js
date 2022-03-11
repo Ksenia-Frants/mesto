@@ -1,25 +1,25 @@
-const showError = (popupElement, inputElement, errorMessage) => {
-  const errorElement = popupElement.querySelector(`#${inputElement.id}-error`);
+const showError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
   errorElement.textContent = errorMessage;
   errorElement.classList.add("popup__input-error_active");
 };
 
-const hideError = (popupElement, inputElement) => {
-  const errorElement = popupElement.querySelector(`#${inputElement.id}-error`);
+const hideError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
   errorElement.textContent = "";
   errorElement.classList.remove("popup__input-error_active");
 };
 
-const checkValidity = (popupElement, inputElement) => {
+const checkValidity = (formElement, inputElement) => {
   const isInputNotValid = !inputElement.validity.valid;
 
   if (isInputNotValid) {
     const errorMessage = inputElement.validationMessage;
-    showError(popupElement, inputElement, errorMessage);
+    showError(formElement, inputElement, errorMessage);
   } else {
-    hideError(popupElement, inputElement);
+    hideError(formElement, inputElement);
   }
 };
 
@@ -38,26 +38,33 @@ const toggleButtonState = (inputList, submitButtonElement) => {
   }
 };
 
-const setEventListeners = (popupElement) => {
-  const inputList = popupElement.querySelectorAll(".popup__input");
-  const submitButtonElement = popupElement.querySelector(".popup__button");
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      checkValidity(popupElement, inputElement);
+const setEventListeners = (formElement) => {
+  const inputList = formElement.querySelectorAll(".popup__input");
+  const submitButtonElement = formElement.querySelector(".popup__button");
+  const inputListIterator = (inputElement) => {
+    const handleInput = (event) => {
+      checkValidity(formElement, inputElement);
       toggleButtonState(inputList, submitButtonElement);
-    });
-  });
+    };
+    inputElement.addEventListener("input", handleInput);
+  };
   toggleButtonState(inputList, submitButtonElement);
+
+  inputList.forEach(inputListIterator);
 };
 
 const enableValidation = () => {
-  const formsList = document.querySelectorAll(".popup");
-  formsList.forEach((popupElement) => {
-    popupElement.addEventListener("submit", (event) => {
+  const formList = document.querySelectorAll(".popup__form");
+  const formListIterator = (formElement) => {
+    const handleFormSubmit = (event) => {
       event.preventDefault();
-    });
-    setEventListeners(popupElement);
-  });
+    };
+    formElement.addEventListener("submit", handleFormSubmit);
+
+    setEventListeners(formElement);
+  };
+
+  formList.forEach(formListIterator);
 };
 
 enableValidation();
