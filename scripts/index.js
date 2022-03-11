@@ -51,6 +51,17 @@ const closePopupByClickOnOverlay = function (event) {
   }
 };
 
+const closePopupByPressEsc = function (event) {
+  if (event.key === "Escape") {
+    const popupList = Array.from(document.querySelectorAll(".popup"));
+    popupList.forEach((popup) => {
+      if (popup.classList.contains("popup_opened")) {
+        popup.classList.remove("popup_opened");
+      }
+    });
+  }
+};
+
 function formEditSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -141,3 +152,4 @@ popupPhotoCloseElement.addEventListener("click", function () {
 });
 
 document.addEventListener("click", closePopupByClickOnOverlay);
+document.addEventListener("keydown", closePopupByPressEsc);
