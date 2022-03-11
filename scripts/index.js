@@ -45,6 +45,12 @@ const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
 };
 
+const closePopupByClickOnOverlay = function (event) {
+  if (event.target.classList.contains("popup")) {
+    event.target.classList.remove("popup_opened");
+  }
+};
+
 function formEditSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -133,3 +139,5 @@ popupAddElement.addEventListener("submit", formAddSubmitHandler);
 popupPhotoCloseElement.addEventListener("click", function () {
   closePopup(popupPhotoElement);
 });
+
+document.addEventListener("click", closePopupByClickOnOverlay);

@@ -42,13 +42,12 @@ const setEventListeners = (popupElement) => {
   const inputList = popupElement.querySelectorAll(".popup__input");
   const submitButtonElement = popupElement.querySelector(".popup__button");
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", (event) => {
-      console.log(event.target.name, event.target.value);
-
+    inputElement.addEventListener("input", () => {
       checkValidity(popupElement, inputElement);
       toggleButtonState(inputList, submitButtonElement);
     });
   });
+  toggleButtonState(inputList, submitButtonElement);
 };
 
 const enableValidation = () => {
