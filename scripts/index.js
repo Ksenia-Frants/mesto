@@ -25,7 +25,9 @@ const items = [
   },
 ];
 
+const popups = document.querySelectorAll(".popup");
 const popupEditElement = document.querySelector(".popup_edit");
+const popupContainer = document.querySelector(".popup__container");
 const popupCloseElement = popupEditElement.querySelector(".popup__close");
 const profileEditButtonElement = document.querySelector(
   ".profile__edit-button"
@@ -39,6 +41,7 @@ const profileDescription = document.querySelector(".profile__description");
 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
+  window.onkeydown = closePopupByPressEsc;
 };
 
 const closePopup = function (popup) {
@@ -151,5 +154,6 @@ popupPhotoCloseElement.addEventListener("click", function () {
   closePopup(popupPhotoElement);
 });
 
-document.addEventListener("click", closePopupByClickOnOverlay);
-document.addEventListener("keydown", closePopupByPressEsc);
+popups.forEach((popup) =>
+  popup.addEventListener("click", closePopupByClickOnOverlay)
+);

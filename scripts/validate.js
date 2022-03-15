@@ -1,70 +1,84 @@
-const showError = (formElement, inputElement, errorMessage) => {
+const showError = (formElement, inputElement, errorMessage, { errorClass }) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("popup__input-error_active");
+  errorElement.classList.add(errorClass);
 };
 
-const hideError = (formElement, inputElement) => {
+const hideError = (formElement, inputElement, { errorClass }) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
   errorElement.textContent = "";
-  errorElement.classList.remove("popup__input-error_active");
+  errorElement.classList.remove(errorClass);
 };
-
-const checkValidity = (formElement, inputElement) => {
+//Проверка на валидность
+const checkValidity = (formElement, inputElement, rest) => {
   const isInputNotValid = !inputElement.validity.valid;
 
   if (isInputNotValid) {
     const errorMessage = inputElement.validationMessage;
-    showError(formElement, inputElement, errorMessage);
+    showError(formElement, inputElement, errorMessage, rest);
   } else {
-    hideError(formElement, inputElement);
+    hideError(formElement, inputElement, rest);
   }
 };
 
-const toggleButtonState = (inputList, submitButtonElement) => {
+const toggleButtonState = (
+  inputList,
+  submitButtonElement,
+  { inactiveButtonClass }
+) => {
   const inputElements = Array.from(inputList);
   const hasInvalidInput = inputElements.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 
   if (hasInvalidInput) {
-    submitButtonElement.classList.add("popup__button_inactive");
+    submitButtonElement.classList.add(inactiveButtonClass);
     submitButtonElement.setAttribute("disabled", true);
   } else {
-    submitButtonElement.classList.remove("popup__button_inactive");
+    submitButtonElement.classList.remove(inactiveButtonClass);
     submitButtonElement.removeAttribute("disabled");
   }
 };
-
-const setEventListeners = (formElement) => {
-  const inputList = formElement.querySelectorAll(".popup__input");
-  const submitButtonElement = formElement.querySelector(".popup__button");
+//Устанавливает слушатели событий на список всех инпутов формы
+const setEventListeners = (
+  formElement,
+  { inputSelector, submitButtonSelector, ...rest }
+) => {
+  const inputList = formElement.querySelectorAll(inputSelector);
+  const submitButtonElement = formElement.querySelector(submitButtonSelector);
   const inputListIterator = (inputElement) => {
-    const handleInput = (event) => {
-      checkValidity(formElement, inputElement);
-      toggleButtonState(inputList, submitButtonElement);
+    const handleInput = () => {
+      checkValidity(formElement, inputElement, rest);
+      toggleButtonState(inputList, submitButtonElement, rest);
     };
     inputElement.addEventListener("input", handleInput);
   };
-  toggleButtonState(inputList, submitButtonElement);
+  toggleButtonState(inputList, submitButtonElement, rest);
 
   inputList.forEach(inputListIterator);
 };
-
-const enableValidation = () => {
-  const formList = document.querySelectorAll(".popup__form");
+//Находим все формы и в каждой вызываем слушатель событий
+const enableValidation = ({ formSelector, ...rest }) => {
+  const formList = document.querySelectorAll(formSelector);
   const formListIterator = (formElement) => {
     const handleFormSubmit = (event) => {
       event.preventDefault();
     };
     formElement.addEventListener("submit", handleFormSubmit);
 
-    setEventListeners(formElement);
+    setEventListeners(formElement, rest);
   };
 
   formList.forEach(formListIterator);
 };
 
-enableValidation();
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+});
