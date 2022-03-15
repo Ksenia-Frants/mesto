@@ -46,6 +46,7 @@ const openPopup = function (popup) {
 
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
+  window.onkeydown = null;
 };
 
 const closePopupByClickOnOverlay = function (event) {
