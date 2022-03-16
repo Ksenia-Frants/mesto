@@ -41,6 +41,7 @@ const toggleButtonState = (
     submitButtonElement.removeAttribute("disabled");
   }
 };
+
 //Устанавливает слушатели событий на список всех инпутов формы
 const setEventListeners = (
   formElement,
@@ -59,6 +60,7 @@ const setEventListeners = (
 
   inputList.forEach(inputListIterator);
 };
+
 //Находим все формы и в каждой вызываем слушатель событий
 const enableValidation = ({ formSelector, ...rest }) => {
   const formList = document.querySelectorAll(formSelector);
