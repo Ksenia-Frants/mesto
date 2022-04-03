@@ -49,16 +49,16 @@ const listElement = document.querySelector(".elements__list");
 const itemTemplateContent = document.querySelector(
   "#photo-card-template"
 ).content;
-const cardImage = itemTemplateContent.querySelector(".elements__image");
-const cardTitle = itemTemplateContent.querySelector(".elements__title");
-const popupPhotoElement = document.querySelector(".popup_photo");
+//const cardImage = itemTemplateContent.querySelector(".elements__image");
+//const cardTitle = itemTemplateContent.querySelector(".elements__title");
+//const popupPhotoElement = document.querySelector(".popup_photo");
 const popupPhotoCloseElement = popupPhotoElement.querySelector(".popup__close");
-const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
-const popupCaption = popupPhotoElement.querySelector(".popup__caption");
+//const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
+//const popupCaption = popupPhotoElement.querySelector(".popup__caption");
 const buttonSubmit = popupAddElement.querySelector(".popup__button");
 const addForm = popupAddElement.querySelector(".popup__form");
 
-const openPopup = function (popup) {
+export const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupByPressEsc);
 };
