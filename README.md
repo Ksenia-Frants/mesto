@@ -18,7 +18,8 @@ The work was done according to the layout of figma.
 - positioning elements;
 - adaptive layout;
 - grid layout;
-- basic Java Script and Browser Operation.
+- basic Java Script and Browser Operation;
+- principles of OOP
 
 **Project link:**
 [Ссылка на проект](https://ksenia-frants.github.io/mesto/)

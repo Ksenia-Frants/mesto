@@ -1,23 +1,23 @@
-import { openPopup } from "./index.js";
+import {
+  imagePhotoPopup,
+  popupCaption,
+  openPopup,
+  popupPhotoElement,
+} from "./utils.js";
 
-const popupPhotoElement = document.querySelector(".popup_photo");
-const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
-const popupCaption = popupPhotoElement.querySelector(".popup__caption");
-
-class Card {
+export class Card {
   constructor(data, cardSelector) {
     this._text = data.name;
     this._link = data.link;
-    this._cardSelector = cardSelector;
+    this._cardSelector = document
+      .querySelector(cardSelector)
+      .content.querySelector(".elements__list-object");
     this._toggleLike = this._toggleLike.bind(this);
     this._deleteCard = this._deleteCard.bind(this);
     this._openPhoto = this._openPhoto.bind(this);
   }
   _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".elements__list-object")
-      .cloneNode(true);
+    const cardElement = this._cardSelector.cloneNode(true);
     return cardElement;
   }
   createCard() {
