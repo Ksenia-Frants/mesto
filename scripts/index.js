@@ -91,8 +91,8 @@ popupCloseElement.addEventListener("click", function () {
 popupEditElement.addEventListener("submit", handleFormEditSubmit);
 profileAddButtonElement.addEventListener("click", function () {
   popupAddForm.reset();
+  disableButton(buttonSubmit, "popup__button_disabled");
   openPopup(popupAddElement);
-  addValidator.resetValidation();
 });
 popupAddCloseElement.addEventListener("click", function () {
   closePopup(popupAddElement);

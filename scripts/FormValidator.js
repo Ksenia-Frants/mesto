@@ -8,12 +8,7 @@ export class FormValidator {
       this._settings.submitButtonSelector
     );
   }
-  resetValidation() {
-    this._toggleButtonState();
-    this._inputList.forEach((input) => {
-      this._hideError(input);
-    });
-  }
+
   _showError = (inputElement, errorMessage) => {
     const { inputErrorClass, errorClass } = this._settings;
     const errorElement = this._formElement.querySelector(
