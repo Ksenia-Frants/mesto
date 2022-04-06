@@ -1,4 +1,4 @@
-.elements {
+.cards {
   padding-top: 51px;
   margin: auto;
   max-width: 880px;
@@ -6,13 +6,13 @@
 }
 
 @media screen and (max-width: 950px) {
-  .elements {
+  .cards {
     max-width: 90%;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .elements {
+  .cards {
     max-width: 92.5%;
     padding-top: 36px;
   }

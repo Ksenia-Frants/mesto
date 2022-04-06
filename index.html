@@ -33,8 +33,8 @@
         </div>
         <button class="profile__add-button"></button>
       </section>
-      <section class="elements" aria-label="Секция для карточек">
-        <ul class="elements__list"></ul>
+      <section class="cards" aria-label="Секция для карточек">
+        <ul class="cards__list"></ul>
       </section>
     </main>
     <footer class="footer">
@@ -118,14 +118,14 @@
       </div>
     </section>
     <template id="photo-card-template">
-      <li class="elements__list-object">
-        <img src="#" alt="" class="elements__image" />
-        <div class="elements__image-description">
-          <h2 class="elements__title"></h2>
-          <button class="elements__like"></button>
+      <div class="card">
+        <img src="#" alt="" class="card__image" />
+        <div class="card__image-description">
+          <h2 class="card__title"></h2>
+          <button class="card__like"></button>
         </div>
-        <button class="elements__delete"></button>
-      </li>
+        <button class="card__delete"></button>
+      </div>
     </template>
     <script src="./scripts/index.js" type="module"></script>
   </body>

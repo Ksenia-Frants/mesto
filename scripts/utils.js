@@ -10,6 +10,11 @@ export const closePopupByPressEsc = function (event) {
   }
 };
 
+export const disableButton = function (button, disableClass) {
+  button.classList.add(disableClass);
+  button.disabled = true;
+};
+
 export const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupByPressEsc);

@@ -1,4 +1,4 @@
-.elements__list-object {
+.card {
   border-radius: 10px;
   background-color: #ffff;
   width: 100%;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 370px) {
-  .elements__list-object {
+  .card {
     max-width: 282px;
   }
 }
