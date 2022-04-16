@@ -28,7 +28,7 @@ export const titleInput = popupAddElement.querySelector(
 export const descriptionInput = popupAddElement.querySelector(
   ".popup__input_type_description"
 );
-export const listElement = document.querySelector(".cards__list");
+export const listElement = ".cards__list";
 export const popupPhotoElement = document.querySelector(".popup_photo");
 export const popupPhotoCloseElement =
   popupPhotoElement.querySelector(".popup__close");
