@@ -1,4 +1,4 @@
-import { disableButton } from "./utils.js";
+import { disableButton } from "../utils/utils.js";
 
 export class FormValidator {
   constructor(settings, formElement) {

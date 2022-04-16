@@ -1,9 +1,10 @@
+import { openPopup } from "../utils/utils.js";
+
 import {
   imagePhotoPopup,
   popupCaption,
-  openPopup,
   popupPhotoElement,
-} from "./utils.js";
+} from "../utils/constants.js";
 
 export class Card {
   constructor(data, cardSelector) {

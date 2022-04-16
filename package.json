@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "This is my fourth project work. She gave me a start in learning java script.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ksenia-Frants/mesto.git"
+  },
+  "author": "Ksenia Frants",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ksenia-Frants/mesto/issues"
+  },
+  "homepage": "https://github.com/Ksenia-Frants/mesto#readme"
+}

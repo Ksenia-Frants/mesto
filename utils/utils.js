@@ -19,7 +19,3 @@ export const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupByPressEsc);
 };
-
-export const popupPhotoElement = document.querySelector(".popup_photo");
-export const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
-export const popupCaption = popupPhotoElement.querySelector(".popup__caption");

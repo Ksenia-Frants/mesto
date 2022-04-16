@@ -1,45 +1,28 @@
 import {
-  closePopup,
-  openPopup,
+  popupEditElement,
+  popupEditForm,
+  popupCloseElement,
+  profileEditButtonElement,
+  nameInput,
+  jobInput,
+  profileName,
+  profileDescription,
+  popupAddElement,
+  popupAddForm,
+  popupAddCloseElement,
+  profileAddButtonElement,
+  titleInput,
+  descriptionInput,
+  listElement,
+  popupPhotoCloseElement,
+  buttonSubmit,
+  options,
   popupPhotoElement,
-  disableButton,
-} from "./utils.js";
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-import { items } from "./cardsArray.js";
-
-const popupEditElement = document.querySelector(".popup_edit");
-const popupEditForm = popupEditElement.querySelector(".popup__form");
-const popupCloseElement = popupEditElement.querySelector(".popup__close");
-const profileEditButtonElement = document.querySelector(
-  ".profile__edit-button"
-);
-const nameInput = popupEditElement.querySelector(".popup__input_type_name");
-const jobInput = popupEditElement.querySelector(
-  ".popup__input_type_description"
-);
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
-const popupAddElement = document.querySelector(".popup_add");
-const popupAddForm = popupAddElement.querySelector(".popup__form");
-const popupAddCloseElement = popupAddElement.querySelector(".popup__close");
-const profileAddButtonElement = document.querySelector(".profile__add-button");
-const titleInput = popupAddElement.querySelector(".popup__input_type_name");
-const descriptionInput = popupAddElement.querySelector(
-  ".popup__input_type_description"
-);
-const listElement = document.querySelector(".cards__list");
-const popupPhotoCloseElement = popupPhotoElement.querySelector(".popup__close");
-const buttonSubmit = popupAddElement.querySelector(".popup__button");
-
-const options = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
+} from "../utils/constants.js";
+import { closePopup, openPopup, disableButton } from "../utils/utils.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { items } from "../scripts/cardsArray.js";
 
 const editValidator = new FormValidator(options, popupEditForm);
 const addValidator = new FormValidator(options, popupAddForm);
