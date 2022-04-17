@@ -7,9 +7,11 @@ import {
 } from "../utils/constants.js";
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor({ data, handleCardClick }, cardSelector) {
+    this._data = data;
     this._text = data.name;
     this._link = data.link;
+    this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }
   _getTemplate() {
@@ -23,9 +25,9 @@ export default class Card {
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector(".card__image");
     this._cardTitle = this._element.querySelector(".card__title");
-    this._cardTitle.textContent = this._text;
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._text;
+    this._cardTitle.textContent = this._data.name;
+    this._cardImage.src = this._data.link;
+    this._cardImage.alt = this._data.name;
     this._likeButton = this._element.querySelector(".card__like");
     this._deleteButton = this._element.querySelector(".card__delete");
     this._setEventListeners();
@@ -37,15 +39,21 @@ export default class Card {
   _deleteCard = () => {
     this._cardElement.remove();
   };
-  _openPhoto = () => {
+  /*_openPhoto = () => {
     imagePhotoPopup.src = this._link;
     popupCaption.textContent = this._text;
     imagePhotoPopup.alt = this._text;
     openPopup(popupPhotoElement);
-  };
+    this._handleCardClick(this._link, this._text);
+  };*/
   _setEventListeners() {
     this._likeButton.addEventListener("click", this._toggleLike);
     this._deleteButton.addEventListener("click", this._deleteCard);
-    this._cardImage.addEventListener("click", this._openPhoto);
+    this._cardImage.addEventListener("click", () =>
+      this._handleCardClick({
+        name: this._text,
+        src: this._link,
+      })
+    );
   }
 }

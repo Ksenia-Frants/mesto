@@ -18,20 +18,53 @@ import {
   buttonSubmit,
   options,
   popupPhotoElement,
+  imagePhotoPopup,
 } from "../utils/constants.js";
 import { closePopup, openPopup, disableButton } from "../utils/utils.js";
 import Card from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { items } from "../scripts/cardsArray.js";
 import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+
+/*const cardList = new Section(
+  {
+    items: items,
+    renderer: (cardItem) => {
+      const card = new Card(
+        {
+          data: cardItem,
+          handleCardClick: () => {
+            popupWithImage.open(items);
+          },
+        },
+        "#photo-card-template"
+      );
+      const cardElement = card.createCard();
+      cardList.addItem(cardElement);
+    },
+  },
+  listElement
+);*/
+
+const createNewCard = (data) => {
+  const card = new Card(
+    {
+      data,
+      handleCardClick: () => {
+        popupWithImage.open(data);
+      },
+    },
+    "#photo-card-template"
+  );
+  return card.createCard();
+};
 
 const cardList = new Section(
   {
     items: items,
-    renderer: (cardItem) => {
-      const card = new Card(cardItem, "#photo-card-template");
-      const cardElement = card.createCard();
-      cardList.addItem(cardElement);
+    renderer: (data) => {
+      cardList.addItem(createNewCard(data));
     },
   },
   listElement
@@ -42,6 +75,9 @@ const addValidator = new FormValidator(options, popupAddForm);
 
 editValidator.enableValidation();
 addValidator.enableValidation();
+
+const popupWithImage = new PopupWithImage(".popup_photo");
+popupWithImage.setEventListeners();
 
 const closePopupByClickOnOverlay = (event) => {
   if (event.target.classList.contains("popup_opened")) {
