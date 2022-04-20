@@ -11,10 +11,14 @@ export const nameInput = popupEditElement.querySelector(
 export const jobInput = popupEditElement.querySelector(
   ".popup__input_type_description"
 );
+export const userName = ".profile__name";
+export const userAbout = ".profile__description";
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(
   ".profile__description"
 );
+export const popupAddSelector = ".popup_add";
+export const popupEditSelector = ".popup_edit";
 export const popupAddElement = document.querySelector(".popup_add");
 export const popupAddForm = popupAddElement.querySelector(".popup__form");
 export const popupAddCloseElement =

@@ -15,22 +15,13 @@ export default class Popup {
       this.close();
     }
   };
-  _handleOverlayClose(event) {
-    if (event.key === "Escape") {
-      this_popup.close();
-    }
-  }
-  setEventListeners = () => {
+  setEventListeners() {
     const closeElement = this._popup.querySelector(".popup__close");
     closeElement.addEventListener("click", () => this.close());
-    document.addEventListener("click", this._handleOverlayClose);
-  };
+    this._popup.addEventListener("click", (event) => {
+      if (event.target.classList.contains("popup_opened")) {
+        this.close();
+      }
+    });
+  }
 }
-
-/*setEventListeners = () => {
-  const closeElement = this._popup.querySelector(".popup__close");
-  closeElement.addEventListener("click", () => {
-    document.addEventListener("click", this._handleOverlayClose);
-  });
-};
-}*/
