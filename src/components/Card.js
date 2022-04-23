@@ -39,13 +39,6 @@ export default class Card {
   _deleteCard = () => {
     this._cardElement.remove();
   };
-  /*_openPhoto = () => {
-    imagePhotoPopup.src = this._link;
-    popupCaption.textContent = this._text;
-    imagePhotoPopup.alt = this._text;
-    openPopup(popupPhotoElement);
-    this._handleCardClick(this._link, this._text);
-  };*/
   _setEventListeners() {
     this._likeButton.addEventListener("click", this._toggleLike);
     this._deleteButton.addEventListener("click", this._deleteCard);

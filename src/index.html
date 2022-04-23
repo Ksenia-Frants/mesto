@@ -3,14 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="pages/index.css" />
     <title>Mesto</title>
   </head>
 
   <body class="page">
     <header class="header">
       <img
-        src="./images/logo/Vector.svg "
+        src="<%=require('./images/logo/Vector.svg')%>"
         alt="Логотип сайта - Mesto Russia."
         class="logo"
       />
@@ -19,7 +18,7 @@
       <section class="profile">
         <div class="profile__container">
           <img
-            src="./images/Avatar.jpg"
+            src="<%=require('./images/Avatar.jpg')%>"
             alt="Аватар профиля."
             class="profile__avatar"
           />
@@ -127,6 +126,5 @@
         <button class="card__delete"></button>
       </div>
     </template>
-    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>
