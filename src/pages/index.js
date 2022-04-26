@@ -1,8 +1,6 @@
 import {
   popupEditForm,
   profileEditButtonElement,
-  nameInput,
-  jobInput,
   userName,
   userAbout,
   popupAddSelector,
@@ -12,10 +10,8 @@ import {
   titleInput,
   descriptionInput,
   listElement,
-  buttonSubmit,
   options,
 } from "../utils/constants.js";
-import { disableButton } from "../utils/utils.js";
 import Card from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { items } from "../scripts/cardsArray.js";
@@ -61,14 +57,9 @@ const popupWithImage = new PopupWithImage(".popup_photo");
 popupWithImage.setEventListeners();
 
 const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
-  formSubmitHandler: () => {
-    const item = createNewCard({
-      name: titleInput.value,
-      link: descriptionInput.value,
-    });
-    cardList.addItem(item);
-  },
+  formSubmitHandler: (data) => cardList.addItem(data),
 });
+
 popupWithFormAdd.setEventListeners();
 
 const userInfo = new UserInfo({
@@ -86,14 +77,14 @@ const popupWithFormEdit = new PopupWithForm(popupEditSelector, {
 popupWithFormEdit.setEventListeners();
 
 profileEditButtonElement.addEventListener("click", () => {
-  const { name, description } = userInfo.getUserInfo();
-  nameInput.value = name;
-  jobInput.value = description;
+  const data = userInfo.getUserInfo();
+  popupWithFormEdit.setInputValues(data);
+  editValidator.resetValidation();
   popupWithFormEdit.open();
 });
 
 profileAddButtonElement.addEventListener("click", () => {
-  popupAddForm.reset();
-  disableButton(buttonSubmit, "popup__button_disabled");
+  addValidator.disableButton();
+  addValidator.resetValidation();
   popupWithFormAdd.open();
 });

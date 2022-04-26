@@ -1,5 +1,3 @@
-import { disableButton } from "../utils/utils.js";
-
 export class FormValidator {
   constructor(settings, formElement) {
     this._formElement = formElement;
@@ -8,7 +6,10 @@ export class FormValidator {
       this._settings.submitButtonSelector
     );
   }
-
+  disableButton() {
+    this._submitButtonElement.classList.add(this._settings.inactiveButtonClass);
+    this._submitButtonElement.disabled = true;
+  }
   _showError = (inputElement, errorMessage) => {
     const { inputErrorClass, errorClass } = this._settings;
     const errorElement = this._formElement.querySelector(
@@ -42,7 +43,7 @@ export class FormValidator {
       return !inputElement.validity.valid;
     });
     if (hasInvalidInput) {
-      disableButton(this._submitButtonElement, inactiveButtonClass);
+      this.disableButton();
     } else {
       this._submitButtonElement.classList.remove(inactiveButtonClass);
       this._submitButtonElement.removeAttribute("disabled");
@@ -65,4 +66,10 @@ export class FormValidator {
     });
     this._setEventListeners();
   };
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideError(inputElement);
+    });
+  }
 }

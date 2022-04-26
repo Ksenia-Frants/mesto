@@ -5,12 +5,6 @@ export const popupCloseElement =
 export const profileEditButtonElement = document.querySelector(
   ".profile__edit-button"
 );
-export const nameInput = popupEditElement.querySelector(
-  ".popup__input_type_name"
-);
-export const jobInput = popupEditElement.querySelector(
-  ".popup__input_type_description"
-);
 export const userName = ".profile__name";
 export const userAbout = ".profile__description";
 export const profileName = document.querySelector(".profile__name");
@@ -36,7 +30,6 @@ export const listElement = ".cards__list";
 export const popupPhotoElement = document.querySelector(".popup_photo");
 export const popupPhotoCloseElement =
   popupPhotoElement.querySelector(".popup__close");
-export const buttonSubmit = popupAddElement.querySelector(".popup__button");
 export const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
 export const popupCaption = popupPhotoElement.querySelector(".popup__caption");
 
