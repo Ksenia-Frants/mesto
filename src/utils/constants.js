@@ -20,12 +20,6 @@ export const popupAddCloseElement =
 export const profileAddButtonElement = document.querySelector(
   ".profile__add-button"
 );
-export const titleInput = popupAddElement.querySelector(
-  ".popup__input_type_name"
-);
-export const descriptionInput = popupAddElement.querySelector(
-  ".popup__input_type_description"
-);
 export const listElement = ".cards__list";
 export const popupPhotoElement = document.querySelector(".popup_photo");
 export const popupPhotoCloseElement =

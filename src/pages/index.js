@@ -7,8 +7,6 @@ import {
   popupAddForm,
   popupEditSelector,
   profileAddButtonElement,
-  titleInput,
-  descriptionInput,
   listElement,
   options,
 } from "../utils/constants.js";
@@ -57,7 +55,7 @@ const popupWithImage = new PopupWithImage(".popup_photo");
 popupWithImage.setEventListeners();
 
 const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
-  formSubmitHandler: (data) => cardList.addItem(data),
+  formSubmitHandler: (data) => cardList.addItem(createNewCard(data)),
 });
 
 popupWithFormAdd.setEventListeners();
