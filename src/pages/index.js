@@ -17,6 +17,28 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css";
+import Api from "../components/api.js";
+
+const api = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-40/",
+  headers: {
+    authorization: "ef576f44-6eda-4fa2-963c-752429bbf3fe",
+    "content-type": "application/json",
+  },
+});
+
+let userId;
+
+const user = api.getUser();
+user.then((res) => {
+  userInfo.setUserInfo(res);
+  userId = res._id;
+});
+
+const cards = api.getinitialCards();
+cards.then((data) => {
+  data.map((item) => item.name);
+});
 
 const editValidator = new FormValidator(options, popupEditForm);
 const addValidator = new FormValidator(options, popupAddForm);
