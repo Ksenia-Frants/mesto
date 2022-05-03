@@ -27,18 +27,13 @@ const api = new Api({
   },
 });
 
-let userId;
-
 const user = api.getUser();
 user.then((res) => {
   userInfo.setUserInfo(res);
-  userId = res._id;
 });
 
 const cards = api.getinitialCards();
-cards.then((data) => {
-  data.map((item) => item.name);
-});
+cards.then((data) => {});
 
 const editValidator = new FormValidator(options, popupEditForm);
 const addValidator = new FormValidator(options, popupAddForm);
@@ -73,7 +68,10 @@ const userInfo = new UserInfo({
 
 const popupWithFormEdit = new PopupWithForm(popupEditSelector, {
   formSubmitHandler: (data) => {
-    userInfo.setUserInfo(data);
+    const { name, description } = data;
+    api.editProfile(name, description).then(() => {
+      userInfo.setUserInfo(data);
+    });
     popupWithFormEdit.close();
   },
 });

@@ -33,4 +33,23 @@ export default class Api {
         console.log(err);
       });
   }
+  editProfile(name, about) {
+    return fetch("https://mesto.nomoreparties.co/v1/cohort-40/users/me", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
