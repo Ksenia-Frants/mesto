@@ -27,16 +27,6 @@ const api = new Api({
 
 const initialData = [api.getUser(), api.getinitialCards()];
 
-// const user = api.getUser();
-// user
-//   .then((res) => {
-//     userInfo.setUserInfo(res);
-//   })
-//   .catch((err) => console.log(err));
-
-// const cards = api.getinitialCards();
-// cards.then((data) => {});
-
 const editValidator = new FormValidator(options, popupEditForm);
 const addValidator = new FormValidator(options, popupAddForm);
 
@@ -47,11 +37,9 @@ const popupWithImage = new PopupWithImage(".popup_photo");
 
 popupWithImage.setEventListeners();
 
-const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
-  formSubmitHandler: (data) => cardList.addItem(data),
-});
-
-popupWithFormAdd.setEventListeners();
+// const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
+//   formSubmitHandler: (data) => cardList.addItem(data),
+// });
 
 // const cardList = new Section(
 //   {
@@ -78,6 +66,7 @@ const createNewCard = (data) => {
 
 const cardList = new Section(
   {
+    items: [],
     renderer: (data) => {
       cardList.addItem(createNewCard(data));
     },
@@ -85,10 +74,26 @@ const cardList = new Section(
   listElement
 );
 
+cardList.renderItems(items);
+
 const userInfo = new UserInfo({
   nameSelector: userName,
   descriptionSelector: userAbout,
 });
+
+const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
+  formSubmitHandler: (data) => {
+    api.addCard(data.name, data.link).then((res) => {
+      const item = createNewCard({
+        name: res.name,
+        link: res.link,
+      });
+      cardList.addItem(item);
+    });
+  },
+});
+
+popupWithFormAdd.setEventListeners();
 
 const popupWithFormEdit = new PopupWithForm(popupEditSelector, {
   formSubmitHandler: (data) => {

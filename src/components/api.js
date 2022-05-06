@@ -38,7 +38,7 @@ export default class Api {
       }),
     }).then((res) => this._errorHandler(res));
   }
-  addCard(data) {
+  addCard(name, link) {
     return fetch(`${this._url}cards`, {
       method: "POST",
       headers: {
@@ -46,10 +46,17 @@ export default class Api {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
-        link: data.link,
+        name,
+        link,
       }),
     }).then((res) => this._errorHandler(res));
   }
-  addLike() {}
+  deleteCard(id) {
+    return fetch(`${this._url}cards/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+    }).then((res) => this._errorHandler(res));
+  }
 }
