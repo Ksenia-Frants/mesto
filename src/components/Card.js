@@ -3,6 +3,7 @@ export default class Card {
     this._data = data;
     this._text = data.name;
     this._link = data.link;
+    this._likes = data.likes;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }
@@ -29,6 +30,10 @@ export default class Card {
     //Нашли элементы лайка и удаления
     this._likeButton = this._element.querySelector(".card__like");
     this._deleteButton = this._element.querySelector(".card__delete");
+
+    // //Счетчик лайков
+    // this._likeNumber = this._element.querySelector(".card__like-number");
+    // this._likeNumber.textContent = this._likes;
 
     this._setEventListeners();
 

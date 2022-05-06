@@ -127,6 +127,27 @@
         </form>
       </div>
     </section>
+    <section class="popup popup_avatar">
+      <div class="popup__container">
+        <button class="popup__close"></button>
+        <form name="avatarForm" class="popup__form" novalidate>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <fieldset class="popup__info">
+            <label for="link" class="popup__label"></label>
+            <input
+              type="url"
+              class="popup__input popup__input_type_avatar-link"
+              id="link"
+              name="link"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span class="popup__error" id="title-error"></span>
+          </fieldset>
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+      </div>
+    </section>
     <template id="photo-card-template">
       <div class="card">
         <img src="#" alt="" class="card__image" />
