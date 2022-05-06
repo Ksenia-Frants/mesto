@@ -1,55 +1,55 @@
 export default class Api {
-  constructor(config) {
-    this._url = config.url;
-    this._headers = config.headers;
+  constructor(data) {
+    this._url = data.url;
+    this._token = data.token;
+  }
+  _errorHandler(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
   getUser() {
-    return fetch("https://nomoreparties.co/v1/cohort-40/users/me", {
-      method: "GET",
-      headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return fetch(`${this._url}users/me`, {
+      headers: {
+        authorization: this._token,
+      },
+    }).then((res) => this._errorHandler(res));
   }
+
   getinitialCards() {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-40/cards", {
-      method: "GET",
-      headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return fetch(`${this._url}cards`, {
+      headers: {
+        authorization: this._token,
+      },
+    }).then((res) => this._errorHandler(res));
   }
+
   editProfile(name, about) {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-40/users/me", {
+    return fetch(`${this._url}users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: this._token,
+        "content-type": "application/json",
+      },
       body: JSON.stringify({
-        name,
-        about,
+        name: name,
+        about: about,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => this._errorHandler(res));
   }
+  addCard(data) {
+    return fetch(`${this._url}cards`, {
+      method: "POST",
+      headers: {
+        authorization: this._token,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
+    }).then((res) => this._errorHandler(res));
+  }
+  addLike() {}
 }

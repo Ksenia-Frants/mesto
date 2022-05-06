@@ -10,6 +10,7 @@ import {
   listElement,
   options,
 } from "../utils/constants.js";
+import Card from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { items } from "../scripts/cardsArray.js";
 import Section from "../components/Section.js";
@@ -21,19 +22,20 @@ import Api from "../components/api.js";
 
 const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-40/",
-  headers: {
-    authorization: "ef576f44-6eda-4fa2-963c-752429bbf3fe",
-    "content-type": "application/json",
-  },
+  token: "ef576f44-6eda-4fa2-963c-752429bbf3fe",
 });
 
-const user = api.getUser();
-user.then((res) => {
-  userInfo.setUserInfo(res);
-});
+const initialData = [api.getUser(), api.getinitialCards()];
 
-const cards = api.getinitialCards();
-cards.then((data) => {});
+// const user = api.getUser();
+// user
+//   .then((res) => {
+//     userInfo.setUserInfo(res);
+//   })
+//   .catch((err) => console.log(err));
+
+// const cards = api.getinitialCards();
+// cards.then((data) => {});
 
 const editValidator = new FormValidator(options, popupEditForm);
 const addValidator = new FormValidator(options, popupAddForm);
@@ -51,15 +53,37 @@ const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
 
 popupWithFormAdd.setEventListeners();
 
+// const cardList = new Section(
+//   {
+//     items: items,
+//     renderer: (data) => {
+//       cardList.addItem(createNewCard(data));
+//     },
+//   },
+//   listElement
+// );
+
+const createNewCard = (data) => {
+  const card = new Card(
+    {
+      data,
+      handleCardClick: () => {
+        popupWithImage.open(data);
+      },
+    },
+    "#photo-card-template"
+  );
+  return card.createCard();
+};
+
 const cardList = new Section(
   {
-    items: items,
-    popup: popupWithImage,
+    renderer: (data) => {
+      cardList.addItem(createNewCard(data));
+    },
   },
   listElement
 );
-
-cardList.renderItems();
 
 const userInfo = new UserInfo({
   nameSelector: userName,
@@ -89,3 +113,10 @@ profileAddButtonElement.addEventListener("click", () => {
   addValidator.resetValidation();
   popupWithFormAdd.open();
 });
+
+Promise.all(initialData)
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user);
+    cardList.renderItems(cards);
+  })
+  .catch((err) => alert(err));

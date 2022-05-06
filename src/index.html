@@ -116,12 +116,24 @@
         </figure>
       </div>
     </section>
+    <section class="popup popup_delete">
+      <div class="popup__container">
+        <button class="popup__close"></button>
+        <form name="deleteForm" class="popup__form" novalidate>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button type="submit" class="popup__button">Да</button>
+        </form>
+      </div>
+    </section>
     <template id="photo-card-template">
       <div class="card">
         <img src="#" alt="" class="card__image" />
         <div class="card__image-description">
           <h2 class="card__title"></h2>
-          <button class="card__like"></button>
+          <div class="card__like-container">
+            <button class="card__like"></button>
+            <p class="card__like-number">0</p>
+          </div>
         </div>
         <button class="card__delete"></button>
       </div>
