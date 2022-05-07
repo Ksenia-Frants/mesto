@@ -31,9 +31,9 @@ export default class Card {
     this._likeButton = this._element.querySelector(".card__like");
     this._deleteButton = this._element.querySelector(".card__delete");
 
-    // //Счетчик лайков
-    // this._likeNumber = this._element.querySelector(".card__like-number");
-    // this._likeNumber.textContent = this._likes;
+    //Счетчик лайков
+    this._likeNumber = this._element.querySelector(".card__like-number");
+    this._likeNumber.textContent = this._likes.length;
 
     this._setEventListeners();
 

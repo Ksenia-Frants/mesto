@@ -25,6 +25,8 @@ const api = new Api({
   token: "ef576f44-6eda-4fa2-963c-752429bbf3fe",
 });
 
+let userId, addCardLike, deleteCardLike;
+
 const initialData = [api.getUser(), api.getinitialCards()];
 
 const editValidator = new FormValidator(options, popupEditForm);
@@ -74,7 +76,7 @@ const cardList = new Section(
   listElement
 );
 
-cardList.renderItems(items);
+// cardList.renderItems(items);
 
 const userInfo = new UserInfo({
   nameSelector: userName,
@@ -87,6 +89,7 @@ const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
       const item = createNewCard({
         name: res.name,
         link: res.link,
+        likes: res.likes,
       });
       cardList.addItem(item);
     });
