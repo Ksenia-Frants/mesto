@@ -74,6 +74,12 @@ const createNewCard = (data, userId) => {
         popupWithImage.open(data);
       },
       handleDeleteCard,
+      handleLikeCard: (data) => {
+        return api.addLike(data);
+      },
+      handleDeleteLikeCard: (data) => {
+        return api.deleteLike(data);
+      },
     },
     "#photo-card-template"
   );

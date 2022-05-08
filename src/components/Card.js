@@ -18,7 +18,6 @@ export default class Card {
     this._ownerId = data.owner._id;
     this._cardId = data._id;
     this._handleCardClick = handleCardClick;
-
     this._handleDeleteCard = handleDeleteCard;
     this._handleLikeCard = handleLikeCard;
     this._handleDeleteLikeCard = handleDeleteLikeCard;
@@ -52,24 +51,43 @@ export default class Card {
     this._likeNumber = this._element.querySelector(".card__like-number");
     this._likeNumber.textContent = this._likes.length;
 
-    if (this._userId === this._ownerId) {
-      // добавить класс отображения иконки
-      // повесить слушатель удаления карточки на иконку
-      this._deleteButton.classList.add("card__delete_active");
-      this._deleteButton.addEventListener("click", (evt) => {
-        this._deleteCardHandler();
-      });
-    }
+    this._setLike();
 
     this._setEventListeners();
 
     return this._element;
   }
-
+  _setLike() {
+    if (this._likes.some((user) => user._id === this._userId)) {
+      this._likeButton.classList.add("card__like_active");
+    }
+  }
   //Установили лайк
-  _toggleLike = () => {
-    this._likeButton.classList.toggle("card__like_active");
-  };
+  _toggleLike() {
+    if (!this._likeButton.classList.contains("card__like_active")) {
+      this._handleLikeCard(this._cardId)
+        .then((res) => {
+          this._data = res;
+          this._likeNumber.textContent = res.likes.length;
+          this._likeButton.classList.add("card__like_active");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      this._handleDeleteLikeCard(this._cardId)
+        .then((res) => {
+          this._data = res;
+          this._likeNumber.textContent = res.likes.length;
+          this._likeButton.classList.remove("card__like_active");
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  _setLike() {
+    if (this._likes.some((like) => like._id === this._userId)) {
+      this._likeButton.classList.add("card__like_active");
+    }
+  }
 
   //Удалили карточку
   _deleteCardHandler() {
@@ -82,8 +100,15 @@ export default class Card {
 
   //Установили слушатели: лайк, удаление, зум фото
   _setEventListeners() {
-    this._likeButton.addEventListener("click", this._toggleLike);
-    this._deleteButton.addEventListener("click", this._deleteCard);
+    this._likeButton.addEventListener("click", () => this._toggleLike());
+    if (this._userId === this._ownerId) {
+      // добавить класс отображения иконки
+      // повесить слушатель удаления карточки на иконку
+      this._deleteButton.classList.add("card__delete_active");
+      this._deleteButton.addEventListener("click", () => {
+        this._deleteCardHandler();
+      });
+    }
     this._cardImage.addEventListener("click", this._handleCardClick);
   }
 }
