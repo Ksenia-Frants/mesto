@@ -81,7 +81,7 @@ export default class Api {
       },
     }).then((res) => this._errorHandler(res));
   }
-  editAvatar() {
+  editAvatar(avatar) {
     return fetch(`${this._url}users/me/avatar`, {
       method: "PATCH",
       headers: {

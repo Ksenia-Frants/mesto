@@ -27,9 +27,10 @@ export const popupPhotoCloseElement =
 export const imagePhotoPopup = popupPhotoElement.querySelector(".popup__image");
 export const popupCaption = popupPhotoElement.querySelector(".popup__caption");
 export const popupDelete = ".popup_delete";
-export const popupAvatar = ".popup_avatar";
+export const popupAvatar = document.querySelector(".popup_avatar");
+export const popupAvatarSelector = ".popup_avatar";
 export const avatar = ".profile__avatar";
-export const avatarButton = ".profile__avatar-button";
+export const avatarButton = document.querySelector(".profile__avatar-button");
 
 export const options = {
   formSelector: ".popup__form",
