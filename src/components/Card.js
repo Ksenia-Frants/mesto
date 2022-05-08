@@ -1,10 +1,27 @@
 export default class Card {
-  constructor({ data, handleCardClick }, cardSelector) {
+  constructor(
+    {
+      data,
+      userId,
+      handleCardClick,
+      handleDeleteCard,
+      handleLikeCard,
+      handleDeleteLikeCard,
+    },
+    cardSelector
+  ) {
     this._data = data;
     this._text = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._userId = userId;
+    this._ownerId = data.owner._id;
+    this._cardId = data._id;
     this._handleCardClick = handleCardClick;
+
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleLikeCard = handleLikeCard;
+    this._handleDeleteLikeCard = handleDeleteLikeCard;
     this._cardSelector = cardSelector;
   }
   //Нашли элемент карточки
@@ -35,6 +52,15 @@ export default class Card {
     this._likeNumber = this._element.querySelector(".card__like-number");
     this._likeNumber.textContent = this._likes.length;
 
+    if (this._userId === this._ownerId) {
+      // добавить класс отображения иконки
+      // повесить слушатель удаления карточки на иконку
+      this._deleteButton.classList.add("card__delete_active");
+      this._deleteButton.addEventListener("click", (evt) => {
+        this._deleteCardHandler();
+      });
+    }
+
     this._setEventListeners();
 
     return this._element;
@@ -46,11 +72,15 @@ export default class Card {
   };
 
   //Удалили карточку
-  _deleteCard = () => {
-    this._cardElement.remove();
-  };
+  _deleteCardHandler() {
+    const data = {
+      card: this._element,
+      cardId: this._cardId,
+    };
+    this._handleDeleteCard(data);
+  }
 
-  //Установили слушатели
+  //Установили слушатели: лайк, удаление, зум фото
   _setEventListeners() {
     this._likeButton.addEventListener("click", this._toggleLike);
     this._deleteButton.addEventListener("click", this._deleteCard);
