@@ -86,9 +86,10 @@ export default class Api {
       method: "PATCH",
       headers: {
         authorization: this._token,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        avatar,
+        avatar: avatar["link-avatar"],
       }),
     }).then((res) => this._errorHandler(res));
   }

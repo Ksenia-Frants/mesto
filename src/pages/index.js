@@ -45,20 +45,6 @@ const popupWithImage = new PopupWithImage(".popup_photo");
 
 popupWithImage.setEventListeners();
 
-// const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
-//   formSubmitHandler: (data) => cardList.addItem(data),
-// });
-
-// const cardList = new Section(
-//   {
-//     items: items,
-//     renderer: (data) => {
-//       cardList.addItem(createNewCard(data));
-//     },
-//   },
-//   listElement
-// );
-
 const handleDeleteCard = (data) => {
   cardDeletePopup.setData(data);
   cardDeletePopup.open();
@@ -94,8 +80,6 @@ const cardList = new Section(
   },
   listElement
 );
-
-// cardList.renderItems(items);
 
 const cardDeletePopup = new PopupDelete(popupDelete, {
   formSubmitHandler: (data) => {
@@ -183,7 +167,6 @@ avatarButton.addEventListener("click", () => {
 
 Promise.all(initialData)
   .then(([user, cards]) => {
-    console.log(user);
     userInfo.setUserInfo(user);
     userInfo.setUserAvatar(user);
     cardList.renderItems(cards.reverse(), user._id);
