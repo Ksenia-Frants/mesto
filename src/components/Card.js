@@ -1,16 +1,10 @@
 export default class Card {
   constructor(
-    {
-      data,
-      userId,
-      handleCardClick,
-      handleDeleteCard,
-      handleLikeCard,
-      handleDeleteLikeCard,
-    },
+    { data, userId, handleCardClick, handleDeleteCard, handleLikeCard },
     cardSelector
   ) {
     this._data = data;
+    this._id = data.id;
     this._text = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -20,9 +14,9 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
     this._handleLikeCard = handleLikeCard;
-    this._handleDeleteLikeCard = handleDeleteLikeCard;
     this._cardSelector = cardSelector;
   }
+
   //Нашли элемент карточки
   _getTemplate() {
     this._cardElement = document
@@ -51,41 +45,26 @@ export default class Card {
     this._likeNumber = this._element.querySelector(".card__like-number");
     this._likeNumber.textContent = this._likes.length;
 
-    this._setLike();
+    // this._setLike()
 
     this._setEventListeners();
+    this.toggleLike(this._likes);
 
     return this._element;
   }
-  _setLike() {
-    if (this._likes.some((user) => user._id === this._userId)) {
-      this._likeButton.classList.add("card__like_active");
-    }
+
+  setLike() {
+    this._cardLiked = this._likes.some((user) => user._id === this._userId);
+    return this._cardLiked;
   }
   //Установили лайк
-  _toggleLike() {
-    if (!this._likeButton.classList.contains("card__like_active")) {
-      this._handleLikeCard(this._cardId)
-        .then((res) => {
-          this._data = res;
-          this._likeNumber.textContent = res.likes.length;
-          this._likeButton.classList.add("card__like_active");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      this._handleDeleteLikeCard(this._cardId)
-        .then((res) => {
-          this._data = res;
-          this._likeNumber.textContent = res.likes.length;
-          this._likeButton.classList.remove("card__like_active");
-        })
-        .catch((err) => console.log(err));
-    }
-  }
-
-  _setLike() {
-    if (this._likes.some((like) => like._id === this._userId)) {
+  toggleLike(newLikes) {
+    this._likes = newLikes;
+    this._likeNumber.textContent = this._likes.length;
+    if (this.setLike()) {
       this._likeButton.classList.add("card__like_active");
+    } else {
+      this._likeButton.classList.remove("card__like_active");
     }
   }
 
@@ -100,7 +79,9 @@ export default class Card {
 
   //Установили слушатели: лайк, удаление, зум фото
   _setEventListeners() {
-    this._likeButton.addEventListener("click", () => this._toggleLike());
+    this._likeButton.addEventListener("click", () =>
+      this._handleLikeCard(this._cardId)
+    );
     if (this._userId === this._ownerId) {
       // добавить класс отображения иконки
       // повесить слушатель удаления карточки на иконку

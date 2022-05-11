@@ -1,6 +1,7 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+    this._closeElement = this._popup.querySelector(".popup__close");
   }
   open() {
     this._popup.classList.add("popup_opened");
@@ -16,8 +17,7 @@ export default class Popup {
     }
   };
   setEventListeners() {
-    const closeElement = this._popup.querySelector(".popup__close");
-    closeElement.addEventListener("click", () => this.close());
+    this._closeElement.addEventListener("click", () => this.close());
     this._popup.addEventListener("click", (event) => {
       if (event.target.classList.contains("popup_opened")) {
         this.close();

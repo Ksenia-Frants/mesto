@@ -26,12 +26,26 @@ import "./index.css";
 import Api from "../components/api.js";
 import PopupDelete from "../components/PopupDelete.js";
 
+let userId;
+
 const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-40/",
-  token: "ef576f44-6eda-4fa2-963c-752429bbf3fe",
+  headers: {
+    authorization: "ef576f44-6eda-4fa2-963c-752429bbf3fe",
+    "Content-Type": "application/json",
+  },
 });
 
 const initialData = [api.getUser(), api.getinitialCards()];
+
+Promise.all(initialData)
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user);
+    userInfo.setUserAvatar(user);
+    userId = user._id;
+    cardList.renderItems(cards.reverse(), user._id);
+  })
+  .catch((err) => alert(err));
 
 const editValidator = new FormValidator(options, popupEditForm);
 const addValidator = new FormValidator(options, popupAddForm);
@@ -59,16 +73,27 @@ const createNewCard = (data, userId) => {
         popupWithImage.open(data);
       },
       handleDeleteCard,
-      handleLikeCard: (data) => {
-        return api.addLike(data);
-      },
-      handleDeleteLikeCard: (data) => {
-        return api.addLike(data);
+      handleLikeCard: (id) => {
+        if (card.setLike()) {
+          api
+            .deleteLike(id)
+            .then((res) => {
+              card.toggleLike(res.likes);
+            })
+            .catch((err) => console.log(err));
+        } else {
+          api
+            .addLike(id)
+            .then((res) => {
+              card.toggleLike(res.likes);
+            })
+            .catch((err) => console.log(err));
+        }
       },
     },
     "#photo-card-template"
   );
-  return card.createCard(data);
+  return card.createCard();
 };
 
 const cardList = new Section(
@@ -121,8 +146,9 @@ const popupWithFormAdd = new PopupWithForm(popupAddSelector, {
     api
       .addCard(data.name, data.link)
       .then((res) => {
-        const item = createNewCard(res);
+        const item = createNewCard(res, userId);
         cardList.addItem(item);
+        popupWithFormAdd.close();
       })
       .catch((err) => console.log(err))
       .finally(() => popupWithFormAdd.loadInfo(false));
@@ -134,9 +160,9 @@ popupWithFormAdd.setEventListeners();
 const popupWithFormEdit = new PopupWithForm(popupEditSelector, {
   formSubmitHandler: (data) => {
     popupWithFormEdit.loadInfo(true);
-    const { name, description } = data;
+    const { name, about } = data;
     api
-      .editProfile(name, description)
+      .editProfile(name, about)
       .then(() => {
         userInfo.setUserInfo(data);
         popupWithFormEdit.close();
@@ -164,11 +190,3 @@ avatarButton.addEventListener("click", () => {
   avatarValidator.resetValidation();
   avatarEdit.open();
 });
-
-Promise.all(initialData)
-  .then(([user, cards]) => {
-    userInfo.setUserInfo(user);
-    userInfo.setUserAvatar(user);
-    cardList.renderItems(cards.reverse(), user._id);
-  })
-  .catch((err) => alert(err));

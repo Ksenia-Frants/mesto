@@ -1,7 +1,7 @@
 export default class Api {
   constructor(data) {
     this._url = data.url;
-    this._token = data.token;
+    this._headers = data.headers;
   }
   // Обработчик статуса
   _errorHandler(res) {
@@ -13,27 +13,20 @@ export default class Api {
   // Запрос информации о пользователе
   getUser() {
     return fetch(`${this._url}users/me`, {
-      headers: {
-        authorization: this._token,
-      },
+      headers: this._headers,
     }).then((res) => this._errorHandler(res));
   }
   // Запрос карточек с сервера
   getinitialCards() {
     return fetch(`${this._url}cards`, {
-      headers: {
-        authorization: this._token,
-      },
+      headers: this._headers,
     }).then((res) => this._errorHandler(res));
   }
   // Редактирование профиля
   editProfile(name, about) {
     return fetch(`${this._url}users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._token,
-        "content-type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: about,
@@ -44,10 +37,7 @@ export default class Api {
   addCard(name, link) {
     return fetch(`${this._url}cards`, {
       method: "POST",
-      headers: {
-        authorization: this._token,
-        "content-type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name,
         link,
@@ -58,36 +48,27 @@ export default class Api {
   addLike(id) {
     return fetch(`${this._url}cards/${id}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this._token,
-      },
+      headers: this._headers,
     }).then((res) => this._errorHandler(res));
   }
   // Удаление лайка
   deleteLike(id) {
     return fetch(`${this._url}cards/${id}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._token,
-      },
+      headers: this._headers,
     }).then((res) => this._errorHandler(res));
   }
 
   deleteCard(id) {
     return fetch(`${this._url}cards/${id}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._token,
-      },
+      headers: this._headers,
     }).then((res) => this._errorHandler(res));
   }
   editAvatar(avatar) {
     return fetch(`${this._url}users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatar["link-avatar"],
       }),
