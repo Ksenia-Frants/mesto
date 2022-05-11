@@ -45,8 +45,6 @@ export default class Card {
     this._likeNumber = this._element.querySelector(".card__like-number");
     this._likeNumber.textContent = this._likes.length;
 
-    // this._setLike()
-
     this._setEventListeners();
     this.toggleLike(this._likes);
 
